@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,16 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/shopping-list-edit.component';
+
+
+const routes: Routes = [
+  {path: '', component: HeaderComponent},
+  {path:'recipes', component: RecipesComponent},
+  {path: 'recipelist', component: RecipeListComponent},
+  {path: 'recipeitem', component: RecipeItemComponent}
+]
+
+
 
 @NgModule({
   declarations: [
@@ -26,7 +37,8 @@ import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/sh
   imports: [
     BrowserModule,
     NgbModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
