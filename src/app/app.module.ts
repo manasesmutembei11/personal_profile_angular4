@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +14,7 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/shopping-list-edit.component';
+
 
 
 const routes: Routes = [
@@ -37,10 +40,12 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     NgbModule,
+    FormsModule,
     AppRoutingModule,
+    
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [HttpClient,NgForm],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
