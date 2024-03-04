@@ -3,49 +3,40 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/shopping-list-edit.component';
+import { PersoncreateComponent } from './personcreate/personcreate.component';
+import { PersonService } from './person.service';
+import { PersonListComponent } from './person-list/person-list.component';
+
 
 
 
 const routes: Routes = [
   {path: '', component: HeaderComponent},
-  {path:'recipes', component: RecipesComponent},
-  {path: 'recipelist', component: RecipeListComponent},
-  {path: 'recipeitem', component: RecipeItemComponent}
+  {path: 'person', component: PersoncreateComponent},
+  {path: 'personlist', component: PersonListComponent}
 ]
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    RecipesComponent,
-    RecipeListComponent,
-    RecipeDetailComponent,
-    RecipeItemComponent,
-    ShoppingListComponent,
-    ShoppingListEditComponent
+    PersoncreateComponent,
+    PersonListComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
     FormsModule,
     AppRoutingModule,
+    HttpClientModule,
     
     RouterModule.forRoot(routes)
   ],
-  providers: [HttpClient,NgForm],
+  providers: [HttpClient,NgForm, PersonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

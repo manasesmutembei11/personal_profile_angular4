@@ -1,0 +1,41 @@
+<form class="row g-3 needs-validation" novalidate  (ngSubmit)="onSubmit()" #f="ngForm">
+    <div class="col-md-4">
+      <label for="validationCustom01" class="form-label">First name</label>
+      <input type="text" class="form-control" id="validationCustom01" value="firstName" required ngModel name="firstName" required>
+  
+    </div>
+    <div class="col-md-4">
+      <label for="validationCustom02" class="form-label">Last name</label>
+      <input type="text" class="form-control" id="validationCustom02" value="lastName" required ngModel name="lastName" required>
+  
+    </div>
+  
+    <div class="col-md-4">
+      <label for="validationCustom02" class="form-label">Email</label>
+      <input type="text" class="form-control" id="validationCustom02" value="email" required ngModel name="email" required email>
+  
+    </div>
+  
+    <div class="col-md-4">
+      <label for="validationCustom02" class="form-label">Phone Number</label>
+      <input type="text" class="form-control" id="validationCustom02" value="phone" required ngModel name="phone" required>
+  
+    </div>
+  
+    <div class="col-md-6">
+      <label for="validationCustom03" class="form-label">Country</label>
+      <input type="text" class="form-control" id="validationCustom03" required ngModel name="country" >
+  
+    </div>
+  
+    <div class="col-md-6">
+      <label for="validationCustom03" class="form-label">Date Of Birth</label>
+      <input type="date" class="form-control" id="validationCustom03" required ngModel name="dateOfBirth" required>
+    </div>
+  
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit form</button>
+    </div>
+  </form>
+  <hr>
+<app-person-list></app-person-list>
