@@ -1,3 +1,9 @@
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-primary" type="submit" routerLink="/personlist">People List</button>
+  </div>
+</div>
+
 <form class="row g-3 needs-validation" novalidate  (ngSubmit)="onSubmit()" #f="ngForm">
     <div class="col-md-4">
       <label for="validationCustom01" class="form-label">First name</label>
@@ -33,9 +39,10 @@
       <input type="date" class="form-control" id="validationCustom03" required ngModel name="dateOfBirth" required>
     </div>
   
-    <div class="col-12">
-      <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit form</button>
+    <div class="row">
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit form</button>
+      </div>
     </div>
   </form>
   <hr>
-<app-person-list></app-person-list>

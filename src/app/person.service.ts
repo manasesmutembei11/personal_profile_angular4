@@ -7,15 +7,18 @@ import { Person } from './person.model';
   providedIn: 'root'
 })
 export class PersonService {
-    private apiUrl = 'https://localhost:7240/People';
+    private apiUrl = 'https://localhost:7240';
 
   constructor(private http: HttpClient) { }
 
   savePerson(person: any): Observable<any> {
-      return this.http.post<any>(`${this.apiUrl}/Create`, person);
+      return this.http.post<any>(`${this.apiUrl}/People/Create`, person);
     }
   
-    getAllPersons(): Observable<Person[]> {
-        return this.http.get<Person[]>(`${this.apiUrl}/Index`);
+  getAllPersons(): Observable<Person[]> {
+        return this.http.get<Person[]>(`${this.apiUrl}/People/Index`);
+      }
+  getPersonDetails(id: number): Observable<Person> {
+        return this.http.get<Person>(`${this.apiUrl}/details/${id}`);
       }
 }

@@ -19,8 +19,13 @@ export class PersonListComponent{
     getAllPersons(): void {
       this.personService.getAllPersons()
         .subscribe(
-          (persons: Person[]) => {
-            this.persons = persons;
+          (pagedList: any) => {
+            
+            if (pagedList && pagedList.data && Array.isArray(pagedList.data)) {
+              this.persons = pagedList.data;
+            } else {
+              console.error('Error: Response does not contain a valid data property.', pagedList);
+            }
           },
           error => {
             console.error('Error fetching persons:', error);

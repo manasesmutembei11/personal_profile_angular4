@@ -1,4 +1,10 @@
 <hr>
+<div class="row">
+  <div class="col-12">
+    <button class="btn btn-primary" routerLink="/person">New</button>
+  </div>
+</div>
+<hr>
 <div
   class="table-responsive"
 >
@@ -23,8 +29,27 @@
         <td>{{ person.phone}}</td>
         <td>{{ person.country}}</td>
         <td>{{ person.dateOfBirth}}</td>
+        <td>
+<div class="dropdown open">
+  <button
+    class="btn btn-secondary dropdown-toggle"
+    type="button"
+    id="triggerId"
+    data-bs-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    Actions
+  </button>
+  <div class="dropdown-menu" aria-labelledby="triggerId">
+    <button class="dropdown-item" [routerLink]="['/details', person.id]">Details</button>
+    <button class="dropdown-item" [routerLink]="['/edit', person.id]">Edit</button>
+    <button class="dropdown-item" href="#">Delete</button>
+  </div>
+</div>
+</td>
+
       </tr>
     </tbody>
   </table>
 </div>
-

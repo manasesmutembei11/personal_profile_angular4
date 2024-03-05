@@ -11,21 +11,28 @@ import { HeaderComponent } from './header/header.component';
 import { PersoncreateComponent } from './personcreate/personcreate.component';
 import { PersonService } from './person.service';
 import { PersonListComponent } from './person-list/person-list.component';
+import { PersonDetailsComponent } from './person-details/person-details.component';
+import { PersonEditComponent } from './person-edit/person-edit.component';
 
 
 
 
 const routes: Routes = [
-  {path: '', component: HeaderComponent},
+  {path: '', component: AppComponent, pathMatch: 'full'},
   {path: 'person', component: PersoncreateComponent},
-  {path: 'personlist', component: PersonListComponent}
-]
+  {path: 'personlist', component: PersonListComponent},
+  {path: 'details/:id', component: PersonDetailsComponent},
+  {path: 'edit/:id', component: PersonEditComponent}
+  
+];
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     PersoncreateComponent,
-    PersonListComponent
+    PersonListComponent,
+    PersonDetailsComponent,
+    PersonEditComponent,
   ],
   imports: [
     BrowserModule,
