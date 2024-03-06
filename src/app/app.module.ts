@@ -17,12 +17,15 @@ import { PersonEditComponent } from './person-edit/person-edit.component';
 
 
 
+
 const routes: Routes = [
   {path: '', component: AppComponent, pathMatch: 'full'},
   {path: 'person', component: PersoncreateComponent},
   {path: 'personlist', component: PersonListComponent},
   {path: 'details/:id', component: PersonDetailsComponent},
-  {path: 'edit/:id', component: PersonEditComponent}
+  {path: 'edit/:id', component: PersonEditComponent},
+
+ 
   
 ];
 @NgModule({
@@ -32,7 +35,7 @@ const routes: Routes = [
     PersoncreateComponent,
     PersonListComponent,
     PersonDetailsComponent,
-    PersonEditComponent,
+    PersonEditComponent
   ],
   imports: [
     BrowserModule,

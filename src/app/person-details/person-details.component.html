@@ -1,9 +1,37 @@
-<div class="card">
-    <div class="card-body" *ngIf="person">
-      <h5 class="card-title">{{ person.firstName }} {{ person.lastName }}</h5>
-      <p class="card-text">Email: {{ person.email }}</p>
-      <p class="card-text">Phone Number: {{ person.phone }}</p>
-      <p class="card-text">Country: {{ person.country }}</p>
-      <p class="card-text">Date of Birth: {{ person.dateOfBirth }}</p>
-    </div>
+
+<form (ngmodule)="details()">
+  <div class="col-md-4">
+    <label for="validationCustom01" class="form-label">First name</label>
+    <input type="text" class="form-control" id="validationCustom01"  value="firstName" required ngModel="person.firstName" name="firstName" required disabled="disabled">
+
   </div>
+  <div class="col-md-4">
+    <label for="validationCustom02" class="form-label">Last name</label>
+    <input type="text" class="form-control" id="validationCustom02" value="lastName" ngModel="person.lastName"  disabled="disabled">
+
+  </div>
+
+  <div class="col-md-4">
+    <label for="validationCustom02" class="form-label">Email</label>
+    <input type="text" class="form-control" id="validationCustom02" disabled="disabled" value="email" required ngModel="person.email" name="email" required email>
+
+  </div>
+
+  <div class="col-md-4">
+    <label for="validationCustom02" class="form-label">Phone Number</label>
+    <input type="text" class="form-control" id="validationCustom02" disabled="disabled" value="phone" required ngModel="person.phone" name="phone" required>
+
+  </div>
+
+  <div class="col-md-6">
+    <label for="validationCustom03" class="form-label">Country</label>
+    <input type="text" class="form-control" id="validationCustom03" disabled="disabled" required ngModel="person.country" name="country" >
+
+  </div>
+  <hr>
+  <button type="submit" class="btn btn-primary" >Update</button>
+</form>
+
+
+
+  

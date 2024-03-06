@@ -7,22 +7,24 @@ import { Person } from '../person.model';
   styleUrl: './person-list.component.scss'
 })
 export class PersonListComponent{
+    person: Person;
+    error = '';
 
-    persons: Person[] = [];
+    people: Person[] = [];
   
     constructor(private personService: PersonService) { }
   
     ngOnInit(): void {
-      this.getAllPersons();
+      this.getAllPeople();
     }
   
-    getAllPersons(): void {
-      this.personService.getAllPersons()
+    getAllPeople(): void {
+      this.personService.getAllPeople()
         .subscribe(
           (pagedList: any) => {
             
             if (pagedList && pagedList.data && Array.isArray(pagedList.data)) {
-              this.persons = pagedList.data;
+              this.people = pagedList.data;
             } else {
               console.error('Error: Response does not contain a valid data property.', pagedList);
             }
@@ -32,4 +34,19 @@ export class PersonListComponent{
           }
         );
     }
+
+
+    deletePerson(id: number): void {
+      const confirmed = window.confirm('Are you sure you want to delete this person?');
+      if (confirmed) {
+        this.personService.deletePerson(id)
+          .subscribe(() => {
+            this.people = this.people.filter(p => p.id !== id);
+          }, Response=>{
+            console.log(Response);
+          }
+          
+          );
+      }
+    } 
   }

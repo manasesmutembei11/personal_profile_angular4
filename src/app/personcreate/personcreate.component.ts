@@ -1,9 +1,11 @@
 
 
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { PersonService } from '../person.service';
+import { Person } from '../person.model';
+import { Router } from '@angular/router';
 
 
 
@@ -14,31 +16,31 @@ import { PersonService } from '../person.service';
 })
 export class PersoncreateComponent {
   
-  @ViewChild('f') personform: NgForm
-person= {
-  id: 0,
-  firstName: '',
-  lastName: '',
-  email: '',
-  phone:'',
-  country: '',
-  dateOfBirth:  new Date,
-  status: 0,
-  paymentNumber: '',
-};
-constructor(private personservice: PersonService) { }  
+  @ViewChild('f') personform: NgForm;
+  person= {
+    id: 0,
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone:'',
+    country: '',
+    dateOfBirth:  new Date,
+    status: 0,
+    paymentNumber: '',
+  };
+
+constructor(private personservice: PersonService, private router: Router) { }  
 
 
   onSubmit(){
-      this.person.firstName= this.personform.value.firstName;
-      this.person.lastName= this.personform.value.lastName;
-      this.person.email= this.personform.value.email;
-      this.person.phone= this.personform.value.phone;
-      this.person.country= this.personform.value.country
-      this.person.dateOfBirth= this.personform.value.dateOfBirth;
-      this.person.status=this.personform.value.status;
-      this.person.paymentNumber= this.personform.value.paymentNumber;
-
+    this.person.firstName= this.personform.value.firstName;
+    this.person.lastName= this.personform.value.lastName;
+    this.person.email= this.personform.value.email;
+    this.person.phone= this.personform.value.phone;
+    this.person.country= this.personform.value.country
+    this.person.dateOfBirth= this.personform.value.dateOfBirth;
+    this.person.status=this.personform.value.status;
+    this.person.paymentNumber= this.personform.value.paymentNumber;
       this.savePerson();    
   }
 
@@ -47,14 +49,18 @@ constructor(private personservice: PersonService) { }
     this.personservice.savePerson(this.person)
       .subscribe(
         response => {
+          window.confirm('Are you sure you want to save person entry?')
           console.log('Person saved successfully:', response);
+          this.router.navigate(['/personlist']);
          
         },
         error => {
           console.error('Error saving person:', error);
           
-        }
+        },
+        
       );
+      
   }
 
 }

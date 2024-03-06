@@ -22,7 +22,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="" *ngFor="let person of persons">
+      <tr class="" *ngFor="let person of people">
         <td scope="row"> {{person.firstName}}</td>
         <td>{{person.lastName}}</td>
         <td>{{ person.email}}</td>
@@ -44,11 +44,10 @@
   <div class="dropdown-menu" aria-labelledby="triggerId">
     <button class="dropdown-item" [routerLink]="['/details', person.id]">Details</button>
     <button class="dropdown-item" [routerLink]="['/edit', person.id]">Edit</button>
-    <button class="dropdown-item" href="#">Delete</button>
+    <button class="dropdown-item" (click)="deletePerson(person.id)">Delete</button>
   </div>
 </div>
 </td>
-
       </tr>
     </tbody>
   </table>

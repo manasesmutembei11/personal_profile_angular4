@@ -9,23 +9,15 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './person-details.component.scss'
 })
 export class PersonDetailsComponent {
-  public person: Person;
-  selectedPerson: Person | null = null;
+  person: Person;
 
-  constructor(private personService: PersonService, private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private personService: PersonService) { }
 
-  getPersonDetails(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.personService.getPersonDetails(id)
-      .subscribe(
-        (person: Person) => {
-          this.person = person;
-        },
-        error => {
-          console.error('Error fetching person details:', error);
-        }
-      );
+  details(): void {
+    const id = this.route.snapshot.params['id'];
+    this.personService.getPersonById(id)
+      .subscribe(response => {
+        this.person = response;
+      });
   }
-
-
 }
