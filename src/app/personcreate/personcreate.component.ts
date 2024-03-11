@@ -6,6 +6,7 @@ import { ViewChild } from '@angular/core';
 import { PersonService } from '../person.service';
 import { Person } from '../person.model';
 import { Router } from '@angular/router';
+import { Country } from '../country.model';
 
 
 
@@ -24,12 +25,14 @@ export class PersoncreateComponent {
     email: '',
     phone:'',
     country: '',
-    dateOfBirth:  new Date,
+    dateOfBirth:  new Date().toLocaleDateString(),
     status: 0,
     paymentNumber: '',
   };
-
+  countries: Country[];
 constructor(private personservice: PersonService, private router: Router) { }  
+
+
 
 
   onSubmit(){
@@ -37,11 +40,18 @@ constructor(private personservice: PersonService, private router: Router) { }
     this.person.lastName= this.personform.value.lastName;
     this.person.email= this.personform.value.email;
     this.person.phone= this.personform.value.phone;
-    this.person.country= this.personform.value.country
+    this.person.country= this.personform.value.country;
     this.person.dateOfBirth= this.personform.value.dateOfBirth;
     this.person.status=this.personform.value.status;
     this.person.paymentNumber= this.personform.value.paymentNumber;
       this.savePerson();    
+  }
+
+  ngOnInit(): void {
+    this.personservice.getCountries(this.countries).subscribe(countries => {
+      this.countries = countries;
+    });
+    
   }
 
   savePerson() {

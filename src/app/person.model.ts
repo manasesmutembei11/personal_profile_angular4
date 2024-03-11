@@ -28,5 +28,6 @@ export class Person{
         this.status = status;
         this.paymentNumber = paymentNumber;
 
+
     }
 }

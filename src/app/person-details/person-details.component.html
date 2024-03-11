@@ -1,37 +1,32 @@
 
-<form (ngmodule)="details()">
+<div class="col-md-7">
+<form (ngSubmit)="ngOnInit()">
   <div class="col-md-4">
     <label for="validationCustom01" class="form-label">First name</label>
-    <input type="text" class="form-control" id="validationCustom01"  value="firstName" required ngModel="person.firstName" name="firstName" required disabled="disabled">
+    <input type="text" class="form-control" id="validationCustom01" value="firstName" [(ngModel)]="person.firstName" name="firstName" disabled="disabled">
 
   </div>
   <div class="col-md-4">
     <label for="validationCustom02" class="form-label">Last name</label>
-    <input type="text" class="form-control" id="validationCustom02" value="lastName" ngModel="person.lastName"  disabled="disabled">
+    <input type="text" class="form-control" id="validationCustom02" value="lastName" [(ngModel)]="person.lastName" name="lastName" disabled="disabled">
 
   </div>
 
   <div class="col-md-4">
     <label for="validationCustom02" class="form-label">Email</label>
-    <input type="text" class="form-control" id="validationCustom02" disabled="disabled" value="email" required ngModel="person.email" name="email" required email>
+    <input type="text" class="form-control" id="validationCustom02" value="email" [(ngModel)]="person.email" name="email" disabled="disabled">
 
   </div>
 
   <div class="col-md-4">
     <label for="validationCustom02" class="form-label">Phone Number</label>
-    <input type="text" class="form-control" id="validationCustom02" disabled="disabled" value="phone" required ngModel="person.phone" name="phone" required>
+    <input type="text" class="form-control" id="validationCustom02" value="phone" [(ngModel)]="person.phone" name="phone" disabled="disabled">
 
   </div>
 
   <div class="col-md-6">
     <label for="validationCustom03" class="form-label">Country</label>
-    <input type="text" class="form-control" id="validationCustom03" disabled="disabled" required ngModel="person.country" name="country" >
-
+    <input type="text" class="form-control" id="validationCustom03" [(ngModel)]="person.country" name="country" disabled="disabled" >
   </div>
-  <hr>
-  <button type="submit" class="btn btn-primary" >Update</button>
-</form>
-
-
-
-  
+  <button class="btn btn-secondary" routerLink="/personlist">
+    <span class="bi bi-arrow-left-circle-fill"></span> Back to list</button>

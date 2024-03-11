@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { PersonService } from '../person.service';
 import { Person } from '../person.model';
 @Component({
@@ -8,9 +8,12 @@ import { Person } from '../person.model';
 })
 export class PersonListComponent{
     person: Person;
-    error = '';
-
     people: Person[] = [];
+    currentPage: number = 1;
+    totalItems: number;
+    pageSize: number;
+    
+
   
     constructor(private personService: PersonService) { }
   
@@ -19,18 +22,21 @@ export class PersonListComponent{
     }
   
     getAllPeople(): void {
-      this.personService.getAllPeople()
+      this.personService.getAllPeople(this.currentPage)
         .subscribe(
           (pagedList: any) => {
-            
             if (pagedList && pagedList.data && Array.isArray(pagedList.data)) {
               this.people = pagedList.data;
+              this. currentPage = pagedList.pageNumber;
+              this.totalItems = pagedList.totalItems;
+              this.pageSize = pagedList.pageSize
             } else {
-              console.error('Error: Response does not contain a valid data property.', pagedList);
+              console.log('Error: Response does not contain a valid data property.', pagedList);
             }
           },
+
           error => {
-            console.error('Error fetching persons:', error);
+            console.log('Error fetching persons:', error);
           }
         );
     }
@@ -47,6 +53,33 @@ export class PersonListComponent{
           }
           
           );
+          this.getAllPeople();
       }
     } 
+    nextPage(): void {
+      if(this.currentPage < this.totalPages()){
+        this.currentPage++;
+        this.getAllPeople();
+
+      }
+
+    }
+  
+    prevPage(): void {
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.getAllPeople();
+      }
+    }
+
+    totalPages(): number {
+      return Math.ceil(this.totalItems / this.pageSize);
+    }
+
+    goToPage(pageNumber: number): void {
+      this.currentPage = pageNumber;
+      this.getAllPeople();
+    }
+
+
   }

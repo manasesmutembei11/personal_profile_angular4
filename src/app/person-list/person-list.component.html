@@ -1,10 +1,10 @@
+
 <hr>
-<div class="row">
-  <div class="col-12">
-    <button class="btn btn-primary" routerLink="/person">New</button>
-  </div>
+<div>
+  <button class="btn btn-primary" routerLink="/person">
+    <span class="bi bi-person-fill-add"></span> New</button>
 </div>
-<hr>
+<HR>
 <div
   class="table-responsive"
 >
@@ -19,6 +19,7 @@
         <th scope="col">Phone Number</th>
         <th scope="col">Country</th>
         <th scope="col">Date of Birth</th>
+        <th scope="col">  </th>
       </tr>
     </thead>
     <tbody>
@@ -42,13 +43,19 @@
     Actions
   </button>
   <div class="dropdown-menu" aria-labelledby="triggerId">
-    <button class="dropdown-item" [routerLink]="['/details', person.id]">Details</button>
-    <button class="dropdown-item" [routerLink]="['/edit', person.id]">Edit</button>
-    <button class="dropdown-item" (click)="deletePerson(person.id)">Delete</button>
+    <button class="dropdown-item" [routerLink]="['/details', person.id]">
+      <span class="bi bi-info-circle me-1"></span> Details</button>
+    <button class="dropdown-item" [routerLink]="['/edit', person.id]">
+      <span class="bi bi-pencil-square me-1"></span> Edit</button>
+    <button class="dropdown-item" (click)="deletePerson(person.id)">
+      <span class="bi bi-trash me-1"></span> Delete</button>
   </div>
 </div>
 </td>
       </tr>
     </tbody>
   </table>
+
 </div>
+
+<app-pagination></app-pagination>

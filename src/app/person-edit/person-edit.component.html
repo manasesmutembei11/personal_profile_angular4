@@ -1,31 +1,31 @@
 
-<form (ngSubmit)="ngOnInit()">
+<form (click)="ngOnInit()">
   <div class="col-md-4">
     <label for="validationCustom01" class="form-label">First name</label>
-    <input type="text" class="form-control" id="validationCustom01" value="firstName" required [(ngModel)]="person.firstName" name="firstName" required>
+    <input type="text" class="form-control" id="validationCustom01" value="person.firstName" [(ngModel)]="person.firstName" name="firstName">
 
   </div>
   <div class="col-md-4">
     <label for="validationCustom02" class="form-label">Last name</label>
-    <input type="text" class="form-control" id="validationCustom02" value="lastName" required [(ngModel)]="person.lastName" name="lastName" required>
+    <input type="text" class="form-control" id="validationCustom02" value="lastName" [(ngModel)]="person.lastName" name="lastName">
 
   </div>
 
   <div class="col-md-4">
     <label for="validationCustom02" class="form-label">Email</label>
-    <input type="text" class="form-control" id="validationCustom02" value="email" required [(ngModel)]="person.email" name="email" required email>
+    <input type="text" class="form-control" id="validationCustom02" value="email" [(ngModel)]="person.email" name="email">
 
   </div>
 
   <div class="col-md-4">
     <label for="validationCustom02" class="form-label">Phone Number</label>
-    <input type="text" class="form-control" id="validationCustom02" value="phone" required [(ngModel)]="person.phone" name="phone" required>
+    <input type="text" class="form-control" id="validationCustom02" value="phone" [(ngModel)]="person.phone" name="phone">
 
   </div>
 
   <div class="col-md-6">
     <label for="validationCustom03" class="form-label">Country</label>
-    <input type="text" class="form-control" id="validationCustom03" required [(ngModel)]="person.country" name="country" >
+    <input type="text" class="form-control" id="validationCustom03" [(ngModel)]="person.country" name="country" >
 
   </div>
   <hr>

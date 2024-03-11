@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PersonService } from '../person.service';
-import { Person } from '../person.model';
 import { ActivatedRoute } from '@angular/router';
+import { Person } from '../person.model';
 
 @Component({
   selector: 'app-person-details',
@@ -13,11 +13,16 @@ export class PersonDetailsComponent {
 
   constructor(private route: ActivatedRoute, private personService: PersonService) { }
 
-  details(): void {
+  ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
-    this.personService.getPersonById(id)
-      .subscribe(response => {
+    this.personService.getPersonDetails(id).subscribe(
+        response => {
         this.person = response;
-      });
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+      );
   }
 }

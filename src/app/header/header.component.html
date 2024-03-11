@@ -1,17 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <a class="navbar-brand" href="#">PersonApp</a>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="/" routerLinkActive="active"[routerLinkActiveOptions]={exact:true}>Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink= "/person" routerLinkActive="active">Person</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink= "/personlist" routerLinkActive="active">People List</a>
-        </li>
 
-      </ul>
-    </div>
-  </nav>
+<div class="dropdown open">
+  <button
+    class="btn btn-secondary dropdown-toggle"
+    type="button"
+    id="triggerId"
+    data-bs-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+
+    <span class="bi bi-person-fill"></span> Person
+  </button>
+  <div class="dropdown-menu" aria-labelledby="triggerId">
+    <button class="dropdown-item" routerLink= "/person" routerLinkActive="active">
+      <span class="bi bi-person-fill-add"></span> New</button>
+    <button class="dropdown-item" routerLink= "/personlist" routerLinkActive="active">
+      <span class="bi bi-list"></span> List</button>
+
+  </div>
+</div>
+

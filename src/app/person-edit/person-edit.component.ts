@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Person } from '../person.model';
 import { PersonService } from '../person.service';
 import { Router, ActivatedRoute } from '@angular/router';
+
+import { Person } from '../person.model';
 
 @Component({
   selector: 'app-person-edit',
@@ -28,8 +29,6 @@ export class PersonEditComponent {
         this.personService.savePerson(this.person)
         console.log(Response)
         this.router.navigate(['/personlist']);
-
-
       }, error => {
         console.log(error)
       });

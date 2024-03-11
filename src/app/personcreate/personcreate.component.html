@@ -1,43 +1,45 @@
 
-<form class="row g-3 needs-validation" novalidate  (ngSubmit)="onSubmit()" #f="ngForm">
+<!--<form class="row g-3 needs-validation" novalidate  (ngSubmit)="onSubmit()" #f="ngForm">
     <div class="col-md-4">
       <label for="validationCustom01" class="form-label">First name</label>
-      <input type="text" class="form-control" id="validationCustom01" value="firstName" required ngModel name="firstName" required>
+      <input type="text" class="form-control" id="validationCustom01" value="firstName" required [(ngModel)]="person.firstName" name="firstName" required>
   
     </div>
     <div class="col-md-4">
       <label for="validationCustom02" class="form-label">Last name</label>
-      <input type="text" class="form-control" id="validationCustom02" value="lastName" required ngModel name="lastName" required>
+      <input type="text" class="form-control" id="validationCustom02" value="lastName" required [(ngModel)]="person.lastName" name="lastName" required>
   
     </div>
   
     <div class="col-md-4">
       <label for="validationCustom02" class="form-label">Email</label>
-      <input type="text" class="form-control" id="validationCustom02" value="email" required ngModel name="email" required email>
+      <input type="text" class="form-control" id="validationCustom02" value="email" required [(ngModel)]="person.email" name="email" required email>
   
     </div>
   
     <div class="col-md-4">
       <label for="validationCustom02" class="form-label">Phone Number</label>
-      <input type="text" class="form-control" id="validationCustom02" value="phone" required ngModel name="phone" required>
+      <input type="text" class="form-control" id="validationCustom02" value="phone" required [(ngModel)]="person.phone" name="phone" required>
   
     </div>
   
     <div class="col-md-6">
       <label for="validationCustom03" class="form-label">Country</label>
-      <input type="text" class="form-control" id="validationCustom03" required ngModel name="country" >
-  
+      <select [(ngModel)]="person.country" name="country" class="form-select" aria-label="Default select example">
+        <option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</option>
+      </select>
     </div>
   
     <div class="col-md-6">
       <label for="validationCustom03" class="form-label">Date Of Birth</label>
-      <input type="date" class="form-control" id="validationCustom03" required ngModel name="dateOfBirth" required>
+      <input type="date" class="form-control" id="validationCustom03" [(ngModel)]="person.dateOfBirth" name="dateOfBirth" required>
     </div>
   
     <div class="row">
-      <div class="col-12">
+      <div class="col-md-6">
         <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit form</button>
       </div>
     </div>
-  </form>
+  </form> -->
   <hr>
+<app-reactiveform></app-reactiveform>

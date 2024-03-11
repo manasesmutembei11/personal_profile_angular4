@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,13 +13,17 @@ import { PersonService } from './person.service';
 import { PersonListComponent } from './person-list/person-list.component';
 import { PersonDetailsComponent } from './person-details/person-details.component';
 import { PersonEditComponent } from './person-edit/person-edit.component';
+import { SharedComponent } from './shared/shared.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { ReactiveformComponent } from './reactiveform/reactiveform.component';
+import { NgxErrorsModule } from '@ngspot/ngx-errors';
 
 
 
 
 
 const routes: Routes = [
-  {path: '', component: AppComponent, pathMatch: 'full'},
+  {path: '', component: SharedComponent, pathMatch: 'full'},
   {path: 'person', component: PersoncreateComponent},
   {path: 'personlist', component: PersonListComponent},
   {path: 'details/:id', component: PersonDetailsComponent},
@@ -35,7 +39,12 @@ const routes: Routes = [
     PersoncreateComponent,
     PersonListComponent,
     PersonDetailsComponent,
-    PersonEditComponent
+    PersonEditComponent,
+    SharedComponent,
+    PaginationComponent,
+    ReactiveformComponent,
+    
+   
   ],
   imports: [
     BrowserModule,
@@ -43,6 +52,9 @@ const routes: Routes = [
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    NgxErrorsModule,
+    NgbPaginationModule,
     
     RouterModule.forRoot(routes)
   ],

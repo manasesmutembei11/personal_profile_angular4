@@ -1,0 +1,62 @@
+
+<form class="row g-3 needs-validation"  [formGroup]="personform" (ngSubmit)="onSubmit()">
+    <div class="col-md-4">
+      <label class="form-label">First name</label>
+      <input type="text" class="form-control" formControlName="firstName" [(ngModel)]="person.firstName">
+      <div ngxErrors="firstName">
+        <div ngxError="required">First name is required</div>
+      </div>
+
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Last name</label>
+      <input type="text" class="form-control"  formControlName="lastName" [(ngModel)]="person.lastName">
+      <div ngxErrors="lastName">
+        <div ngxError="required">Last name is required</div>
+      </div>
+  
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Email</label>
+      <input type="text" class="form-control" formControlName="email" [(ngModel)]="person.email">
+      <div ngxErrors="email">
+        <div ngxError="required">Email is required</div>
+        <div ngxError="email">Please enter a valid email</div>
+      </div>
+  
+    </div>
+  
+    <div class="col-md-4">
+      <label class="form-label">Phone Number</label>
+      <input type="text" class="form-control" formControlName="phone" [(ngModel)]="person.phone">
+      <div ngxErrors="phone">
+        <div ngxError="required">Phone number is required</div>
+      </div>
+  
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Country</label>
+        <select  class="form-select" aria-label="Default select example" formControlName="country" [(ngModel)]="person.country">
+          <option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</option>
+        </select>
+        <div ngxErrors="country">
+            <div ngxError="required">Country is required</div>
+          </div>
+      </div>
+  
+    <div class="col-md-6">
+      <label class="form-label">Date Of Birth</label>
+      <input type="date" class="form-control" formControlName="dateOfBirth" [(ngModel)]="person.dateOfBirth">
+      <div ngxErrors="dateOfBirth">
+        <div ngxError="required">Date of birth is required</div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6">
+        <button class="btn btn-primary" type="submit" >Submit form</button>
+      </div>
+    </div>
+  </form>
