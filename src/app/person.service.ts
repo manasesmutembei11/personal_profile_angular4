@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Person } from './person.model';
+import { Person } from './models/person.model';
 import { Country } from './country.model';
 
 @Injectable({
@@ -16,8 +16,8 @@ export class PersonService {
       return this.http.post<any>(`${this.baseUrl}/People/Create`, person, {headers: new HttpHeaders({"Content-Type": "application/json"})});
     }
   
-  getAllPeople(page: number): Observable<Person[]> {
-        return this.http.get<Person[]>(`${this.baseUrl}/People/Index?page=${page}`);
+  getAllPeople(pageNumber: number): Observable<Person[]> {
+        return this.http.get<Person[]>(`${this.baseUrl}/People/Index?page=${pageNumber}`);
       }
   getPersonDetails(id: number): Observable<Person> {
         const url = `${this.baseUrl}/People/Details?id=${id}`;
@@ -29,7 +29,7 @@ export class PersonService {
         return this.http.delete<void>(url);
       }
 
-  getPersonById(id: number): Observable<Person> {
+  getPersonById(id: string): Observable<Person> {
         const url = `${this.baseUrl}/People/Edit?id=${id}`;
       return this.http.get<Person>(url, {headers: new HttpHeaders({"Content-Type": "application/json"})});
       }

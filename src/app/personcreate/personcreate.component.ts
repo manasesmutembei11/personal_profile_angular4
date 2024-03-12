@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { PersonService } from '../person.service';
-import { Person } from '../person.model';
+import { Person } from '../models/person.model';
 import { Router } from '@angular/router';
 import { Country } from '../country.model';
 
@@ -18,17 +18,7 @@ import { Country } from '../country.model';
 export class PersoncreateComponent {
   
   @ViewChild('f') personform: NgForm;
-  person= {
-    id: 0,
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone:'',
-    country: '',
-    dateOfBirth:  new Date().toLocaleDateString(),
-    status: 0,
-    paymentNumber: '',
-  };
+  person: Person
   countries: Country[];
 constructor(private personservice: PersonService, private router: Router) { }  
 
@@ -72,5 +62,4 @@ constructor(private personservice: PersonService, private router: Router) { }
       );
       
   }
-
 }

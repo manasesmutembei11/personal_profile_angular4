@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { PersonService } from '../person.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { Person } from '../person.model';
+import { Person } from '../models/person.model';
 
 @Component({
   selector: 'app-person-edit',

@@ -58,4 +58,8 @@
 
 </div>
 
-<app-pagination></app-pagination>
+<ngb-pagination [(page)]="pageNumber"
+                [pageSize]="pageSize"
+                [collectionSize]="totalItems"
+                (pageChange)="onPageChange($event)">
+</ngb-pagination>

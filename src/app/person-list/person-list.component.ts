@@ -1,6 +1,6 @@
 import { Component, EventEmitter } from '@angular/core';
 import { PersonService } from '../person.service';
-import { Person } from '../person.model';
+import { Person } from '../models/person.model';
 @Component({
   selector: 'app-person-list',
   templateUrl: './person-list.component.html',
@@ -9,7 +9,7 @@ import { Person } from '../person.model';
 export class PersonListComponent{
     person: Person;
     people: Person[] = [];
-    currentPage: number = 1;
+    pageNumber: number = 1;
     totalItems: number;
     pageSize: number;
     
@@ -22,12 +22,12 @@ export class PersonListComponent{
     }
   
     getAllPeople(): void {
-      this.personService.getAllPeople(this.currentPage)
+      this.personService.getAllPeople(this.pageNumber)
         .subscribe(
           (pagedList: any) => {
             if (pagedList && pagedList.data && Array.isArray(pagedList.data)) {
               this.people = pagedList.data;
-              this. currentPage = pagedList.pageNumber;
+              this.pageNumber = pagedList.pageNumber;
               this.totalItems = pagedList.totalItems;
               this.pageSize = pagedList.pageSize
             } else {
@@ -53,33 +53,12 @@ export class PersonListComponent{
           }
           
           );
-          this.getAllPeople();
+          
       }
     } 
-    nextPage(): void {
-      if(this.currentPage < this.totalPages()){
-        this.currentPage++;
-        this.getAllPeople();
-
-      }
-
+    onPageChange(pageNumber: number) {
+      this.pageNumber = pageNumber; 
+      this.getAllPeople(); 
     }
-  
-    prevPage(): void {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-        this.getAllPeople();
-      }
-    }
-
-    totalPages(): number {
-      return Math.ceil(this.totalItems / this.pageSize);
-    }
-
-    goToPage(pageNumber: number): void {
-      this.currentPage = pageNumber;
-      this.getAllPeople();
-    }
-
 
   }

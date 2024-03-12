@@ -2,7 +2,7 @@
 <form class="row g-3 needs-validation"  [formGroup]="personform" (ngSubmit)="onSubmit()">
     <div class="col-md-4">
       <label class="form-label">First name</label>
-      <input type="text" class="form-control" formControlName="firstName" [(ngModel)]="person.firstName">
+      <input type="text" class="form-control" formControlName="firstName" >
       <div ngxErrors="firstName">
         <div ngxError="required">First name is required</div>
       </div>
@@ -10,7 +10,7 @@
     </div>
     <div class="col-md-4">
       <label class="form-label">Last name</label>
-      <input type="text" class="form-control"  formControlName="lastName" [(ngModel)]="person.lastName">
+      <input type="text" class="form-control"  formControlName="lastName">
       <div ngxErrors="lastName">
         <div ngxError="required">Last name is required</div>
       </div>
@@ -19,7 +19,7 @@
   
     <div class="col-md-4">
       <label class="form-label">Email</label>
-      <input type="text" class="form-control" formControlName="email" [(ngModel)]="person.email">
+      <input type="text" class="form-control" formControlName="email">
       <div ngxErrors="email">
         <div ngxError="required">Email is required</div>
         <div ngxError="email">Please enter a valid email</div>
@@ -29,7 +29,7 @@
   
     <div class="col-md-4">
       <label class="form-label">Phone Number</label>
-      <input type="text" class="form-control" formControlName="phone" [(ngModel)]="person.phone">
+      <input type="text" class="form-control" formControlName="phone">
       <div ngxErrors="phone">
         <div ngxError="required">Phone number is required</div>
       </div>
@@ -38,7 +38,7 @@
 
     <div class="col-md-6">
         <label class="form-label">Country</label>
-        <select  class="form-select" aria-label="Default select example" formControlName="country" [(ngModel)]="person.country">
+        <select  class="form-select" aria-label="Default select example" formControlName="country">
           <option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</option>
         </select>
         <div ngxErrors="country">
@@ -47,16 +47,28 @@
       </div>
   
     <div class="col-md-6">
-      <label class="form-label">Date Of Birth</label>
-      <input type="date" class="form-control" formControlName="dateOfBirth" [(ngModel)]="person.dateOfBirth">
-      <div ngxErrors="dateOfBirth">
-        <div ngxError="required">Date of birth is required</div>
+      <div class="row row-cols-sm-auto">
+        <div class="col-12">
+          <div class="input-group">
+            <input
+              type="text"
+              formControlName="dateOfBirth"
+              class="form-control"
+              name="d2"
+              ngbDatepicker
+              placeholder="Date of birth"
+              #d2="ngbDatepicker"
+              
+            />
+            <button class="btn btn-outline-primary bi bi-calendar3" (click)="d2.toggle()" type="button"></button>
+          </div>
+        </div>
       </div>
-    </div>
+      <hr>
   
     <div class="row">
       <div class="col-md-6">
         <button class="btn btn-primary" type="submit" >Submit form</button>
       </div>
     </div>
-  </form>
+  </div>

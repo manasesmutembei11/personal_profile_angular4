@@ -1,70 +1,96 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PersonService } from '../person.service';
-import { Router } from '@angular/router';
-import { Person } from '../person.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Country } from '../country.model';
+import { NgbDateParserFormatter, NgbDatepicker, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { BaseFormComponent } from '../core/base-form-component';
+import { Person } from '../models/person.model';
+import { first } from 'rxjs';
+import { DpHelper } from '../core/date-picker-helper';
 
 @Component({
   selector: 'app-reactiveform',
   templateUrl: './reactiveform.component.html',
   styleUrl: './reactiveform.component.scss'
 })
-export class ReactiveformComponent implements OnInit {
-personform: FormGroup;
-person= {
-  id: 0,
-  firstName: '',
-  lastName: '',
-  email: '',
-  phone:'',
-  country: '',
-  dateOfBirth:  new Date().toLocaleDateString(),
-  status: 0,
-  paymentNumber: '',
-};
+export class ReactiveformComponent extends BaseFormComponent implements OnInit {
+personform: FormGroup = this.formbuilder.group({});
 countries: Country[];
 
-constructor (private personservice: PersonService, private router: Router, private formbuilder: FormBuilder) {
-  this.personform = this.formbuilder.group({
-    firstName: [this.person.firstName, Validators.required],
-    lastName: [this.person.lastName, Validators.required],
-    email: [this.person.email, Validators.required],
-    phone: [this.person.phone, Validators.required],
-    dateOfBirth: [this.person.dateOfBirth, Validators.required],
-    country: [this.person.country, Validators.required, ]
-  });
+constructor (
+  private personservice: PersonService,
+   private router: ActivatedRoute, private formbuilder: FormBuilder) {
+  super();
+
 }
 
 ngOnInit(): void {
+  this.personform = this.createForm();
   this.personservice.getCountries(this.countries).subscribe(countries => {
     this.countries = countries;
   });
+
+  this.router.params.pipe().subscribe((params) => {
+    this.id = params['id'] ? params['id'] : '';
+    this.editMode = params['id'] != null;
+    this.pageTitle = this.editMode ? 'Edit Area' : 'New Area';
+    this.breadCrumbItems = [
+      { label: 'Master Data' },
+      { label: 'Area' },
+      { label: this.pageTitle, active: true },
+    ];
+    this.buttonText = this.editMode ? 'Update' : 'Create';
+    this.initForm();
+  });
 }
+
+createForm(): FormGroup<any> {
+  const form = this.formbuilder.group({
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', Validators.required],
+    phone: ['', Validators.required],
+    country: ['', Validators.required],
+    dateOfBirth: ['', Validators.required]
+  });
+  return form
+}
+
+initForm() {
+  if (this.editMode) {
+    this.personservice
+      .getPersonById(this.id)
+      .pipe(first())
+      .subscribe((data) => {         
+        this.personform.patchValue(data);         
+      });
+  }  
+}
+
+
 onSubmit() {
-
-  console.log(this.personform)
-  this.savePerson();
-
+  debugger
+  console.log("form value",this.personform.value)
+  this.submitted = true;
+  if (this.validateForm(this.personform)) {
+    const model: Person ={...this.personform.value} ;
+  model.dateOfBirth= DpHelper.toISODate(model.dateOfBirth);
+  console.log("model",model)
+    window.confirm("Confirm save")
+    this.personservice.savePerson(model).subscribe({
+      next: (_) => {
+        console.log(_)
+      },
+      error: (errors) => {
+        this.errors = errors;
+        console.log('Error =>', this.errors);
+      },
+    });
+  }
 };
 
-savePerson() {
-
-  this.personservice.savePerson(this.person)
-    .subscribe(
-      response => {
-        window.confirm('Are you sure you want to save person entry?')
-        console.log('Person saved successfully:', response);
-        this.router.navigate(['/personlist']);
-       
-      },
-      error => {
-        console.error('Error saving person:', error);
-        
-      },
-      
-    );
-    
+back() {
+ 
 }
-
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbDatepickerModule, NgbModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -17,6 +17,8 @@ import { SharedComponent } from './shared/shared.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ReactiveformComponent } from './reactiveform/reactiveform.component';
 import { NgxErrorsModule } from '@ngspot/ngx-errors';
+import { PersonFormComponent } from './person-form/person-form.component';
+
 
 
 
@@ -43,6 +45,7 @@ const routes: Routes = [
     SharedComponent,
     PaginationComponent,
     ReactiveformComponent,
+    PersonFormComponent,
     
    
   ],
@@ -55,6 +58,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     NgxErrorsModule,
     NgbPaginationModule,
+    NgbDatepickerModule,
     
     RouterModule.forRoot(routes)
   ],
