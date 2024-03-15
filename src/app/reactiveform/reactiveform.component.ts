@@ -15,23 +15,25 @@ import { DpHelper } from '../core/date-picker-helper';
   styleUrl: './reactiveform.component.scss'
 })
 export class ReactiveformComponent extends BaseFormComponent implements OnInit {
-personform: FormGroup = this.formbuilder.group({});
+form: FormGroup = this.formbuilder.group({});
 countries: Country[];
 
 constructor (
   private personservice: PersonService,
-   private router: ActivatedRoute, private formbuilder: FormBuilder) {
+  private route: ActivatedRoute,
+  private formbuilder: FormBuilder,
+  private router: Router) {
   super();
 
 }
 
 ngOnInit(): void {
-  this.personform = this.createForm();
+  this.form = this.createForm();
   this.personservice.getCountries(this.countries).subscribe(countries => {
     this.countries = countries;
   });
 
-  this.router.params.pipe().subscribe((params) => {
+  this.route.params.pipe().subscribe((params) => {
     this.id = params['id'] ? params['id'] : '';
     this.editMode = params['id'] != null;
     this.pageTitle = this.editMode ? 'Edit Area' : 'New Area';
@@ -63,7 +65,7 @@ initForm() {
       .getPersonById(this.id)
       .pipe(first())
       .subscribe((data) => {         
-        this.personform.patchValue(data);         
+        this.form.patchValue(data);         
       });
   }  
 }
@@ -71,16 +73,18 @@ initForm() {
 
 onSubmit() {
   debugger
-  console.log("form value",this.personform.value)
+  console.log("form value",this.form.value)
   this.submitted = true;
-  if (this.validateForm(this.personform)) {
-    const model: Person ={...this.personform.value} ;
+  if (this.validateForm(this.form)) {
+    const model: Person ={...this.form.value} ;
   model.dateOfBirth= DpHelper.toISODate(model.dateOfBirth);
   console.log("model",model)
-    window.confirm("Confirm save")
     this.personservice.savePerson(model).subscribe({
       next: (_) => {
         console.log(_)
+        window.confirm('Are you sure you want to save person entry?')
+        console.log('Person saved successfully:', _);
+        this.router.navigate(['/personlist']);
       },
       error: (errors) => {
         this.errors = errors;
@@ -89,6 +93,11 @@ onSubmit() {
     });
   }
 };
+
+
+
+
+
 
 back() {
  

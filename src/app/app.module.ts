@@ -14,7 +14,6 @@ import { PersonListComponent } from './person-list/person-list.component';
 import { PersonDetailsComponent } from './person-details/person-details.component';
 import { PersonEditComponent } from './person-edit/person-edit.component';
 import { SharedComponent } from './shared/shared.component';
-import { PaginationComponent } from './pagination/pagination.component';
 import { ReactiveformComponent } from './reactiveform/reactiveform.component';
 import { NgxErrorsModule } from '@ngspot/ngx-errors';
 import { PersonFormComponent } from './person-form/person-form.component';
@@ -43,7 +42,6 @@ const routes: Routes = [
     PersonDetailsComponent,
     PersonEditComponent,
     SharedComponent,
-    PaginationComponent,
     ReactiveformComponent,
     PersonFormComponent,
     

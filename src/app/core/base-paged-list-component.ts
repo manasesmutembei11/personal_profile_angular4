@@ -24,6 +24,7 @@ export abstract class BasePagedListComponent extends BaseComponent implements On
   }
   ngOnDestroy(): void {
     this.destroy();
+    
   }
 
   protected destroy(): void {
