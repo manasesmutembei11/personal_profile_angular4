@@ -26,7 +26,7 @@ export class PersonListComponent extends BasePagedListComponent implements OnDes
     }
   
     getAllPeople(): void {
-      this.personService.getAllPeople(this.page)
+      this.personService.getAllPeople(this.page, this.pageSize)
         .subscribe(
           (pagedList: any) => {
             if (pagedList && pagedList.data && Array.isArray(pagedList.data)) {
@@ -34,14 +34,15 @@ export class PersonListComponent extends BasePagedListComponent implements OnDes
               this.page = pagedList.pageNumber;
               this.totalCount = pagedList.totalItems;
               this.pageSize = pagedList.pageSize
+              
             } else {
               console.log('Error: Response does not contain a valid data property.', pagedList);
             }
           },
-
-          error => {
-            console.log('Error fetching persons:', error);
+          Response => {
+            console.log(Response)
           }
+
         );
     }
 
@@ -61,7 +62,7 @@ export class PersonListComponent extends BasePagedListComponent implements OnDes
       }
     } 
     loadItems(): any {
-      this.personService.getAllPeople(this.page).subscribe((data: any) => {
+      this.personService.getAllPeople(this.page, this.pageSize).subscribe((data: any) => {
         this.totalCount = data.totalCount;
         this.people = data.items;
       });

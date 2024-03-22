@@ -16,8 +16,8 @@ export class PersonService {
       return this.http.post<any>(`${this.baseUrl}/People/Create`, person, {headers: new HttpHeaders({"Content-Type": "application/json"})});
     }
   
-  getAllPeople(page: number): Observable<Person[]> {
-        return this.http.get<Person[]>(`${this.baseUrl}/People/Index?page=${page}`);
+  getAllPeople(page: number, pageSize: number): Observable<any> {
+        return this.http.get<any>(`${this.baseUrl}/People/GetPagedList/pagedlist?page=${page}$pageSize=${pageSize}`);
       }
   getPersonDetails(id: number): Observable<Person> {
         const url = `${this.baseUrl}/People/Details?id=${id}`;
