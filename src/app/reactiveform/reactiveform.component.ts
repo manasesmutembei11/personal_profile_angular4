@@ -26,6 +26,30 @@ constructor (
   super();
 
 }
+createForm(): FormGroup<any> {
+  const form = this.formbuilder.group({
+    id: [0],
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', Validators.required],
+    phone: ['', Validators.required],
+    country: ['', Validators.required],
+    dateOfBirth: ['', Validators.required],
+    status:[0]
+  });
+  return form
+}
+
+initForm() {
+  if (this.editMode) {
+    this.personservice
+      .getPersonById(this.id)
+      .pipe(first())
+      .subscribe((data) => {         
+        this.form.patchValue(data);        
+      });
+  }   
+}
 
 ngOnInit(): void {
   this.form = this.createForm();
@@ -47,57 +71,38 @@ ngOnInit(): void {
   });
 }
 
-createForm(): FormGroup<any> {
-  const form = this.formbuilder.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    email: ['', Validators.required],
-    phone: ['', Validators.required],
-    country: ['', Validators.required],
-    dateOfBirth: ['', Validators.required]
-  });
-  return form
-}
-
-initForm() {
-  if (this.editMode) {
-    this.personservice
-      .getPersonById(this.id)
-      .pipe(first())
-      .subscribe((data) => {         
-        this.form.patchValue(data);         
-      });
-  }  
-}
-
-
 onSubmit() {
-  debugger
-  console.log("form value",this.form.value)
-  this.submitted = true;
+  this.submitted = true; 
   if (this.validateForm(this.form)) {
-    const model: Person ={...this.form.value} ;
-  model.dateOfBirth= DpHelper.toISODate(model.dateOfBirth);
-  console.log("model",model)
-    this.personservice.savePerson(model).subscribe({
-      next: (_) => {
-        console.log(_)
-        window.confirm('Are you sure you want to save person entry?')
-        console.log('Person saved successfully:', _);
-        this.router.navigate(['/personlist']);
-      },
-      error: (errors) => {
-        this.errors = errors;
-        console.log('Error =>', this.errors);
-      },
-    });
+    let model: Person = { ...this.form.value };
+    model.dateOfBirth = DpHelper.toISODate(model.dateOfBirth);
+    if (this.editMode) {
+      this.personservice.updatePerson(this.id ,model).subscribe({
+        next: (_) => {
+          window.confirm('Are you sure you want to update person entry?');
+          console.log('Person updated successfully:', _);
+          this.router.navigate(['/personlist']);
+        },
+        error: (errors) => {
+          this.errors = errors;
+          console.log('Error =>', this.errors);
+        },
+      });
+    } else {
+      this.personservice.savePerson(model).subscribe({
+        next: (_) => {
+          window.confirm('Are you sure you want to save person entry?');
+          console.log('Person saved successfully:', _);
+          this.router.navigate(['/personlist']);
+        },
+        error: (errors) => {
+          this.errors = errors;
+          console.log('Error =>', this.errors);
+        },
+      });
+    }
   }
-};
-
-
-
-
-
+}
 
 back() {
  

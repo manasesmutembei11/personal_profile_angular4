@@ -1,32 +1,40 @@
-
-<div class="col-md-7">
-<form (ngSubmit)="ngOnInit()">
-  <div class="col-md-4">
-    <label for="validationCustom01" class="form-label">First name</label>
-    <input type="text" class="form-control" id="validationCustom01" value="firstName" [(ngModel)]="person.firstName" name="firstName" disabled="disabled">
-
+<ng-container *ngIf="person">
+  <div class="col-md-7">
+    <div (ngSubmit)="ngOnInit()" >
+      <div class="col-md-4">
+        <label class="form-label">First name</label>
+        <input type="text" class="form-control" [value]="person.firstName" name="firstName" disabled="disabled">
+    
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Last name</label>
+        <input type="text" class="form-control" [value]="person.lastName" name="lastName" disabled="disabled">
+    
+      </div>
+    
+      <div class="col-md-4">
+        <label class="form-label">Email</label>
+        <input type="text" class="form-control" [value]="person.email" name="email" disabled="disabled">
+    
+      </div>
+    
+      <div class="col-md-4">
+        <label class="form-label">Phone Number</label>
+        <input type="text" class="form-control" [value]="person.phone" name="phone" disabled="disabled">
+    
+      </div>
+    
+      <div class="col-md-6">
+        <label class="form-label">Country</label>
+        <input type="text" class="form-control" [value]="person.country" name="country" disabled="disabled" >
+      </div>
+      <hr>
+      <button class="btn btn-secondary" routerLink="/personlist">
+        <span class="bi bi-arrow-left-circle-fill"></span> Back to list</button> 
+    </div>
   </div>
-  <div class="col-md-4">
-    <label for="validationCustom02" class="form-label">Last name</label>
-    <input type="text" class="form-control" id="validationCustom02" value="lastName" [(ngModel)]="person.lastName" name="lastName" disabled="disabled">
+</ng-container>
 
-  </div>
 
-  <div class="col-md-4">
-    <label for="validationCustom02" class="form-label">Email</label>
-    <input type="text" class="form-control" id="validationCustom02" value="email" [(ngModel)]="person.email" name="email" disabled="disabled">
 
-  </div>
 
-  <div class="col-md-4">
-    <label for="validationCustom02" class="form-label">Phone Number</label>
-    <input type="text" class="form-control" id="validationCustom02" value="phone" [(ngModel)]="person.phone" name="phone" disabled="disabled">
-
-  </div>
-
-  <div class="col-md-6">
-    <label for="validationCustom03" class="form-label">Country</label>
-    <input type="text" class="form-control" id="validationCustom03" [(ngModel)]="person.country" name="country" disabled="disabled" >
-  </div>
-  <button class="btn btn-secondary" routerLink="/personlist">
-    <span class="bi bi-arrow-left-circle-fill"></span> Back to list</button>

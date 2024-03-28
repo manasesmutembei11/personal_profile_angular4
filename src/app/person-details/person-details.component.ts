@@ -15,14 +15,13 @@ export class PersonDetailsComponent {
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
-    this.personService.getPersonDetails(id).subscribe(
-        response => {
-        this.person = response;
-        console.log(response);
+    this.personService.getPersonDetails(id).subscribe({
+      next:(_)=>{
+        this.person = _;
+        console.log("Person => ",_);
       },
-      error => {
-        console.log(error);
-      }
-      );
+      error:()=>{}
+    })
+       
   }
 }

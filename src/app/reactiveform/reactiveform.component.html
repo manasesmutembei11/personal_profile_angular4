@@ -1,8 +1,9 @@
-
-<form class="row g-3 needs-validation"  [formGroup]="form" (ngSubmit)="onSubmit()">
+<ng-container>
+  
+  <form class="row g-3 needs-validation"  [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="col-md-4">
       <label class="form-label">First name</label>
-      <input type="text" class="form-control" formControlName="firstName" >
+      <input type="text" class="form-control" formControlName="firstName">
       <div ngxErrors="firstName">
         <div ngxError="required">First name is required</div>
       </div>
@@ -48,30 +49,26 @@
   
     <div class="col-md-6">
       <div class="row row-cols-sm-auto">
+        <label>Date of birth</label>
         <div class="col-12">
           <div class="input-group">
-            <input
-              type="text"
-              formControlName="dateOfBirth"
-              class="form-control"
-              name="d2"
-              ngbDatepicker
-              placeholder="Date of birth"
-              #d2="ngbDatepicker"
-              
-            />
+            <input type="text" class="form-control"  name="d2" ngbDatepicker  #d2="ngbDatepicker" formControlName="dateOfBirth"/>
             <button class="btn btn-outline-primary bi bi-calendar3" (click)="d2.toggle()" type="button"></button>
           </div>
+        </div>
+        <div ngxErrors="dateOfBirth">
+          <div ngxError="required">Date of birth is required</div>
         </div>
       </div>
       <hr>
   
     <div class="row">
       <div class="col-md-6">
-        <button class="btn btn-primary" type="submit" >Submit form</button>
+        <button class="btn btn-primary" type="submit" >{{buttonText}}</button>
       </div>
     </div>
   </div>
-  
 
-  <textarea name="" id="" cols="20" rows="100"></textarea>
+  </form>
+
+</ng-container>

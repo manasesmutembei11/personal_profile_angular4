@@ -5,7 +5,7 @@ export interface Person {
     email: string;
     phone: number;
     country: string;
-    dateOfBirth: Date;
+    dateOfBirth: string;
     status: number;
     paymentNumber: string;
 

@@ -8,34 +8,34 @@ import { Country } from './country.model';
   providedIn: 'root'
 })
 export class PersonService {
-    private baseUrl = 'https://localhost:7240';
+    private baseUrl = 'https://localhost:7240/';
 
   constructor(private http: HttpClient) { }
 
   savePerson(person: any): Observable<any> {
-      return this.http.post<any>(`${this.baseUrl}/People/Create`, person, {headers: new HttpHeaders({"Content-Type": "application/json"})});
+      return this.http.post<any>(`${this.baseUrl}api/People/Create`, person, {headers: new HttpHeaders({"Content-Type": "application/json"})});
     }
   
   getAllPeople(page: number, pageSize: number): Observable<any> {
-        return this.http.get<any>(`${this.baseUrl}/People/GetPagedList/pagedlist?page=${page}$pageSize=${pageSize}`);
+        return this.http.get<any>(`${this.baseUrl}api/People/GetPagedList?pageNumber=${page}&pageSize=${pageSize}`);
       }
   getPersonDetails(id: number): Observable<Person> {
-        const url = `${this.baseUrl}/People/Details?id=${id}`;
+        const url = `${this.baseUrl}api/People/Details?id=${id}`;
         return this.http.get<Person>(url);
       }
 
   deletePerson(id: number): Observable<void> {
-        const url = `${this.baseUrl}/People/Delete?id=${id}`;
+        const url = `${this.baseUrl}api/People/Delete?id=${id}`;
         return this.http.delete<void>(url);
       }
 
   getPersonById(id: string): Observable<Person> {
-        const url = `${this.baseUrl}/People/Edit?id=${id}`;
+        const url = `${this.baseUrl}api/People/Edit?id=${id}`;
       return this.http.get<Person>(url, {headers: new HttpHeaders({"Content-Type": "application/json"})});
       }
 
-  updatePerson(person: Person): Observable<Person> {
-        const url = `${this.baseUrl}/People/Edit?id=${person.id}`;
+  updatePerson(id: string, person: Person): Observable<Person> {
+        const url = `${this.baseUrl}api/People/Edit?id=${id}`;
         return this.http.post<Person>(url, person);
       }
 

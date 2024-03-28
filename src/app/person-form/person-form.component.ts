@@ -25,15 +25,18 @@ export class PersonFormComponent extends BasePagedListComponent implements OnIni
   ngOnDestroy(): void {
     this.destroy();
   }
-  
+
   getAllPeople(): void {
     this.personService.getAllPeople(this.page, this.pageSize)
-      .subscribe(response => {
+      .subscribe( response => {
         this.people = response.data;
-        this.totalCount = response.metaData.totalCount;
         this.page = response.metaData.currentPage;
         this.pageSize = response.metaData.pageSize;
-      });
+        this.totalCount = response.metaData.totalCount;
+        this.maxSize = response.metaData.totalPages;
+      }
+
+      );
   }
 
 
@@ -52,7 +55,7 @@ export class PersonFormComponent extends BasePagedListComponent implements OnIni
     }
   } 
   loadItems(): any {
-    this.personService.getAllPeople( this.page, this.pageSize).subscribe(response => {
+    this.personService.getAllPeople(this.page, this.pageSize).subscribe(response => {
       this.totalCount = response.metaData.totalCount;
       this.people = response.data;
     });

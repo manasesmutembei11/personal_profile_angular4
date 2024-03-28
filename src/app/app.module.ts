@@ -28,7 +28,7 @@ const routes: Routes = [
   {path: 'person', component: PersoncreateComponent},
   {path: 'personlist', component: PersonListComponent},
   {path: 'details/:id', component: PersonDetailsComponent},
-  {path: 'edit/:id', component: PersonEditComponent},
+  {path: 'edit/:id', component: ReactiveformComponent},
 
  
   

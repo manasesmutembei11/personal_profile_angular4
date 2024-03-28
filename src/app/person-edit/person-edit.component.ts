@@ -10,7 +10,8 @@ import { Person } from '../models/person.model';
   styleUrl: './person-edit.component.scss'
 })
 export class PersonEditComponent {
-  person: Person;
+ /* person: Person;
+
 
   constructor(private route: ActivatedRoute, private personService: PersonService,private router:Router) { }
 
@@ -23,7 +24,7 @@ export class PersonEditComponent {
   }
 
   updatePerson(): void {
-    this.personService.updatePerson(this.person)
+   this.personService.updatePerson(this.person)
       .subscribe(Response => {
         window.confirm('Confirm to save changes')
         this.personService.savePerson(this.person)
@@ -31,9 +32,8 @@ export class PersonEditComponent {
         this.router.navigate(['/personlist']);
       }, error => {
         console.log(error)
-      });
-      
+      });  
   }
-
+ */
 
 }
